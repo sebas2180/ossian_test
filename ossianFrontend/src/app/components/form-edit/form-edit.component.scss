@@ -1,0 +1,32 @@
+.central{
+    position: relative;
+    width: 80%;
+    left: 10%;
+}
+mat-card{
+    position: relative;
+    width: 100%;
+    background-color: beige;
+}
+mat-card-header{
+    position: relative;
+   justify-content: center;
+}
+img{
+   width:50%;
+   height: 80%;
+}
+mat-form-field{
+   position: relative;
+   width: 100%;
+}
+mat-form-field{
+    position: relative;
+    width: 100%;
+}
+.botones{
+    display: flex;
+    position: relative;
+    justify-content: stretch;
+
+}

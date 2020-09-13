@@ -1,0 +1,49 @@
+<button  mat-stroked-button   color="warm" type="button"  >
+    Volver
+</button>
+<div class="central">
+    <mat-card>
+        <form [formGroup]="this.form" (ngSubmit)="this.OnSubmit()">
+            <mat-card-header>
+                <img src="{{this.image.url}}">      
+            </mat-card-header>
+            <mat-card-content>
+                <mat-form-field class="title" appearance="outline" name="title">
+                    <mat-label>Titulo</mat-label>
+                    <input matInput type="text" formControlName="title">
+                </mat-form-field>
+
+                <mat-form-field class="url" appearance="outline" name="url">
+                    <mat-label>URL imagen</mat-label>
+                    <input matInput type="text" formControlName="url">
+                </mat-form-field>
+
+                <mat-form-field class="category" appearance="outline" name="category">
+                    <mat-label>Discription</mat-label>
+                    <textarea matInput formControlName="description">
+                    </textarea>
+                </mat-form-field>
+
+                <mat-form-field  >
+                    <mat-select formControlName="url">
+                        <mat-option  *ngFor="let category of this.categories" value={{category}} >
+                            {{category}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            <div class="row" id="botones">
+                <div class="col-md-6 col-lg-6 col-xs-6 col-xs-6 center-block">
+                    <button  mat-stroked-button   color="primary" type="button" (click)="OnSubmit()">
+                        Guardar cambios
+                    </button>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6 col-xs-6 center-block">
+                    <button  mat-stroked-button   color="accent" type="button" (click)=" this.form.reset()">
+                        Limpiar campos
+                    </button>
+                </div>
+            </div>
+        </mat-card-content>
+    </form>
+    </mat-card>
+</div>

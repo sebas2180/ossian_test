@@ -1,0 +1,17 @@
+<div class="panel-1">
+    <div class="panel-2" *ngIf="panel == 2">
+        <app-import-images (addImages)="addImages(null)">       
+        </app-import-images>
+    </div>
+    <div class="row panel-3" *ngIf="panel == 3">
+        <div class="card">
+            <!-- este compoenente genera una cantidad dinamica de cars -->
+            <app-image   *ngFor="let image of this.images"[image]= "this.image"  (updateList)="updateList($event)"  (editFile)="editFile($event)">
+            </app-image> 
+            <!--   -->
+        </div>
+    </div>
+</div>
+<div class="card panel-4" *ngIf="this.panel === 4">
+   <app-form-edit [image]="this.images[number_for_edit-1]"></app-form-edit>
+</div>

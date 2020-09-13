@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\image as image;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\imageCreateRequest as imageRequest;
+
 use Illuminate\Database\Eloquent\Model;
 use GuzzleHttp\Client;
 
 class imageController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +20,18 @@ class imageController extends Controller
      */
     public function index()
     {
-        return image::all();
+
+        $headers = [
+            'Access-Control-Allow-Methods'=> 'POST, GET, OPTIONS, PUT, DELETE',
+            'Access-Control-Allow-Headers'=> 'X-Requested-With, Content-Type, Accept, Origin, Authorization',
+            'Access-Control-Allow-Origin' => '*'
+        ];
+
+        $response = image::all();
+
+        return \response($response, 200, $headers);
+        
+       // return response()->json(['status'=>200,'Array'=>$response]);
     }
 
     /**
@@ -60,17 +75,6 @@ class imageController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -87,21 +91,25 @@ class imageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateAll()
+    public function update(Request $request)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+       $imageUpdate = image::find($request->get('id'));
+       if( $imageUpdate ) { 
+           $imageUpdate['url'] = $request->get('url');
+           $imageUpdate['category'] = $request->get('category');
+           $imageUpdate['description'] = $request->get('description');
+           $imageUpdate['title'] = $request->get('title');
+          $result =  $imageUpdate->save();
+          if ($result  == 1) {
+            $response  =['status'=>200,'state'=>'Imagen actualizada'];
+            return response()->json($response,200);
+          } else {
+               return response()->json(['status'=>'No se pudo actualizar'],400);
+          }
+       } else {
+            $response  =['status'=>500,'state'=>'ID no encontrado.'];
+            return response()->json($response, 500);
+       }
     }
 
     /**
@@ -112,6 +120,24 @@ class imageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $sucess = DB::table('image')->where('id', '=', $id)->delete();
+            if ( $sucess ) {
+                $response  = ['status'=>200,'state'=>'Borrado exitoso.'];
+                return response()->json($response, 200);
+            } else {
+                $response  = ['status'=>400,'state'=>'Borrado fallido.'];
+                return response()->json($response, 200);
+            }
+        } catch(Exception $e) {
+            $response  = ['status'=>500,'state'=>'Hubo un error.'];
+            return response()->json($response, 200);
+        }
     }
+    public function destroyAll()
+    {
+        DB::table('image')->truncate();
+        return response()->json(['status'=>200,'state'=>'Borrado exitoso.']);
+    }
+
 }

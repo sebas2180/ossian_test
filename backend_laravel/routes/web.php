@@ -18,14 +18,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/listImage',[imageController::class,'index']);
+Route::get('image/list',[imageController::class,'index']);
 
-Route::put('/createImage',[imageController::class,'create']);
+Route::post('image/create',[imageController::class,'create']);
 
-Route::get('/showImage/{id}',[imageController::class,'show']);
+Route::delete('image/delete/{id}',[imageController::class,'destroy']);
 
-Route::delete('/deleteImage/{id}',[imageController::class,'delete']);
+Route::get('image/show/{id}',[imageController::class,'show']);
 
-Route::get('/deleteAll',[imageController::class,'deleteAll']);
+ 
 
-Route::post('/ueditImage7{id}',[imageController::class,'update']);
+Route::delete('image/deleteAll',[imageController::class,'destroyAll']);
+
+Route::post('image/update',[imageController::class,'update']);
