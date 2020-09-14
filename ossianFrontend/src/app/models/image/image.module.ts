@@ -16,7 +16,6 @@ export class ImageModule {
   description: string ;
   category: string ;
   url: string;
-
   ImageModule (id, title, description, category, url) {
 
     this.id = id;

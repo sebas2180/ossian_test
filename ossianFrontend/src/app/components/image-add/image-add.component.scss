@@ -1,0 +1,42 @@
+.span{
+
+    font-size:20px;
+}
+.panel_2{
+    position: relative;
+    width: 80%;
+    left: 10%;
+    clear: both;
+}
+mat-card{
+    position: relative;
+    width: 100%;
+    background-color: white;
+}
+mat-card-header{
+    position: relative;
+   justify-content: center;
+}
+img{
+   width:50%;
+   height: 80%;
+}
+mat-form-field{
+   position: relative;
+   width: 100%;
+}
+textarea{
+    height: 100px;
+}
+.footer{
+    display: flex;
+    justify-content: center;
+}
+.save{
+    display: flex;
+    width: 90%;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 25px;
+
+}

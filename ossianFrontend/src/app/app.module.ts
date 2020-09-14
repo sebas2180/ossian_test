@@ -20,11 +20,14 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatSelectModule} from '@angular/material/select';
 import { MatSortModule }  from '@angular/material/sort';
 
-import { ImageComponent } from './components/image-ui/image/image.component';
+import { ImageComponent } from './components/image/image.component';
 import { ImageUIComponent } from './components/image-ui/image-ui.component';
 import { FormEditComponent } from './components/form-edit/form-edit.component';
 import { ImportImagesComponent } from './components/image-ui/import-images/import-images.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ImageAddComponent } from './components/image-add/image-add.component';
+
+
 
 
 @NgModule({
@@ -35,6 +38,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     FormEditComponent,
     ImportImagesComponent,
     NavbarComponent,
+    ImageAddComponent,
+
     
   ],
   imports: [

@@ -1,11 +1,14 @@
-<button  mat-stroked-button   color="warm" type="button"  >
-    Volver
-</button>
-<div class="central">
+<div class="panel_1">
+    <button mat-icon-button color="warn"><span class="material-icons md-18"  (click)="this.return()">
+          undo   </span>Volver</button>
+    </div>
+<div class="central" *ngIf="this.init_component">
     <mat-card>
         <form [formGroup]="this.form" (ngSubmit)="this.OnSubmit()">
             <mat-card-header>
-                <img src="{{this.image.url}}">      
+                <div *ngIf="this.image">
+                    <img src="{{this.image.url}}">     
+                </div> 
             </mat-card-header>
             <mat-card-content>
                 <mat-form-field class="title" appearance="outline" name="title">
@@ -31,17 +34,13 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-            <div class="row" id="botones">
-                <div class="col-md-6 col-lg-6 col-xs-6 col-xs-6 center-block">
-                    <button  mat-stroked-button   color="primary" type="button" (click)="OnSubmit()">
-                        Guardar cambios
-                    </button>
-                </div>
-                <div class="col-md-6 col-lg-6 col-xs-6 col-xs-6 center-block">
-                    <button  mat-stroked-button   color="accent" type="button" (click)=" this.form.reset()">
-                        Limpiar campos
-                    </button>
-                </div>
+            <div class="buttons" >
+                <button  mat-stroked-button   color="primary" type="button" (click)="OnSubmit()">
+                    Guardar cambios
+                </button>
+                <button  mat-stroked-button   color="accent" type="button" (click)=" this.form.reset()">
+                    Limpiar campos
+                </button>
             </div>
         </mat-card-content>
     </form>

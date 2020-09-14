@@ -28,12 +28,27 @@ export class ImageService {
     .append('Access-Control-Allow-Origin', '*');
     return this.http.post(`${environment.apiUrlBackEnd}/update`,image, {headers: headers} );
   }
+  add(image){
+    const headers = new HttpHeaders()
+    .append('Content-Type', 'application/json')
+    .append('Access-Control-Allow-Headers', 'Content-Type')
+    .append('Access-Control-Allow-Methods', 'POST')
+    .append('Access-Control-Allow-Origin', '*');
+    return this.http.post(`${environment.apiUrlBackEnd}/create`,image, {headers: headers} );
+  }
   import() {
     const headers = new HttpHeaders()
     .append('Content-Type', 'application/json')
     .append('Access-Control-Allow-Headers', 'Content-Type')
     .append('Access-Control-Allow-Methods', 'POST')
     .append('Access-Control-Allow-Origin', '*');
-    return this.http.post(`${environment.apiUrlBackEnd}/create`, {headers: headers});
+    return this.http.get(`${environment.apiUrlBackEnd}/import`, {headers: headers});
+  }
+  show(title) {
+    const params = new HttpParams()
+    .set('title', title.toString());
+    console.log('shiw()');
+    return this.http.get(`${environment.apiUrlBackEnd}/show/`,
+    { params: params });
   }
 }

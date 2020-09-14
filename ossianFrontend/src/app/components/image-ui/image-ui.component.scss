@@ -8,12 +8,25 @@
     align-content: center;
 }
 .panel-3{
-    display: flex;
-    justify-content: center;
     justify-items: stretch;
     margin-top: 25px;
 }
- 
+.panel-4{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-content: center;
+}
+.card-add{
+    display: flex;
+    width:100%;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+}
+.card-images{
+    padding-top: 18px;
+}
 .panel-4{
     display: flex;
     width: 95%;

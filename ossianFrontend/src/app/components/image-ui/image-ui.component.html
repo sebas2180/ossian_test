@@ -1,10 +1,20 @@
+<div  *ngIf="panel == 2 || panel == 3">
+    <app-navbar></app-navbar>
+</div>
 <div class="panel-1">
     <div class="panel-2" *ngIf="panel == 2">
-        <app-import-images (addImages)="addImages(null)">       
+        <app-import-images (addImages)="addImages()">       
         </app-import-images>
     </div>
     <div class="row panel-3" *ngIf="panel == 3">
-        <div class="card">
+         <!-- Boton de para ir a ventana de add imagen -->
+        <mat-card class="card-add">
+            <mat-card-content>
+                <button mat-raised-button color="primary"  routerLink="/add">NUEVA IMAGEN</button>
+            </mat-card-content>
+        </mat-card>
+         <!--   -->
+        <div class="card-images">
             <!-- este compoenente genera una cantidad dinamica de cars -->
             <app-image   *ngFor="let image of this.images"[image]= "this.image"  (updateList)="updateList($event)"  (editFile)="editFile($event)">
             </app-image> 
@@ -12,6 +22,8 @@
         </div>
     </div>
 </div>
-<div class="card panel-4" *ngIf="this.panel === 4">
-   <app-form-edit [image]="this.images[number_for_edit-1]"></app-form-edit>
+<div class="card panel-4" *ngIf="this.panel == 4">
+ <!-- Componente para editar imagen -->
+   <app-form-edit  [image]="this.image_to_edit" (return)="this.addImages()"*ngIf="this.panel == 4"></app-form-edit> 
+ <!--   -->
 </div>

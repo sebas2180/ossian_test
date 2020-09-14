@@ -14,19 +14,16 @@ use App\Http\Controllers\imageController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('image/list',[imageController::class,'index']);
 
 Route::post('image/create',[imageController::class,'create']);
 
 Route::delete('image/delete/{id}',[imageController::class,'destroy']);
 
-Route::get('image/show/{id}',[imageController::class,'show']);
+Route::get('image/list',[imageController::class,'list_all']);
 
- 
+Route::get('image/show/{title}',[imageController::class,'show']);
+
+Route::get('image/import',[imageController::class,'import']);
 
 Route::delete('image/deleteAll',[imageController::class,'destroyAll']);
 

@@ -1,1 +1,10 @@
- 
+<nav class="navbar navbar-light bg-light">
+    <form class="form-inline">
+      <div class="input-group">
+        <div class="input-group-prepend">
+        </div>
+        <input type="text" #box class="form-control" placeholder="Busqueda por titulo"
+         aria-label="title" aria-describedby="basic-addon1" (keyup.enter)="search(box.value)">
+      </div>
+    </form>
+  </nav>

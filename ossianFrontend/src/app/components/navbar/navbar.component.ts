@@ -1,3 +1,4 @@
+import { ImageService } from './../../services/image/image.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-
-  constructor() { }
+  value = '';
+  constructor( private ImageService:  ImageService) { }
 
   ngOnInit(): void {
   }
 
+  search(value: string): void {
+    this.value = value;
+    console.log(this.value);
+    this.ImageService.show(this.value).subscribe(
+      res => {
+        console.log(res);
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
 }

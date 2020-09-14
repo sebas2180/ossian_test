@@ -1,11 +1,15 @@
 <?php
 
 namespace App\Exceptions;
-
+use Throwable; // <-- ADD THIS
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
+    public function report(Throwable $exception) // <-- USE Throwable HERE
+    {
+        parent::report($exception);
+    }
     /**
      * A list of the exception types that are not reported.
      *

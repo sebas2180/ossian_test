@@ -17,7 +17,7 @@ class image extends Model
 	protected $primaryKey = 'id';
 
 	// Atributos que se pueden asignar de manera masiva.
-	protected $fillable = array('title','category','url','description');
+	protected $fillable = array('id','title','category','url','description');
 	
 	// Aquí ponemos los campos que no queremos que se devuelvan en las consultas.
     protected $hidden = ['created_at','updated_at']; 

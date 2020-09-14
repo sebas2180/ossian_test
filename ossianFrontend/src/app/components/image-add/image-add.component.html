@@ -1,0 +1,46 @@
+ 
+<div class="panel_1">
+<button mat-icon-button color="warn"><span class="material-icons md-18"  routerLink="/">  undo   </span>Volver</button>
+</div>
+<div class="panel_2">
+    <form [formGroup]="this.form">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title><h3>Nuevo imagen</h3></mat-card-title>      
+            </mat-card-header>
+            <mat-card-content>
+                <mat-form-field class="title" appearance="outline" name="title">
+                    <mat-label>Titulo</mat-label>
+                    <input matInput type="text" formControlName="title">
+                    <mat-error *ngIf="this.form.get('title')?.invalid ">Falta titulo</mat-error>
+                </mat-form-field>
+    
+                <mat-form-field class="url" appearance="outline" name="url">
+                    <mat-label>URL imagen</mat-label>
+                    <input matInput type="text" formControlName="url">
+                    <mat-error *ngIf="this.form.get('url')?.invalid ">Falta imagen</mat-error>
+                </mat-form-field>
+    
+                <mat-form-field appearance="outline" name="category">
+                    <mat-label>Discription</mat-label>
+                    <textarea matInput formControlName="description">
+                        <mat-error *ngIf="this.form.get('description')?.invalid ">Falta descripcion</mat-error>
+                    </textarea>
+                </mat-form-field>
+    
+                <mat-form-field  >
+                    <mat-select formControlName="category">
+                        <mat-option  *ngFor="let category of this.categories" value={{category}} >
+                            {{category}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="this.form.get('category')?.invalid ">Falta Seleccionar categoria</mat-error>
+                </mat-form-field>
+
+            </mat-card-content>
+            <mat-card-footer class="footer">
+                <button mat-raised-button color="primary" (click)="save()" class="save"><h4>GUARDAR</h4></button>
+            </mat-card-footer>
+        </mat-card>
+    </form>
+</div>

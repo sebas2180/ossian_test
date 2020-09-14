@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\image as image;
+use App\Models\image as imageModel;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 use App\Http\Requests\imageCreateRequest as imageRequest;
-
 use Illuminate\Database\Eloquent\Model;
 use GuzzleHttp\Client;
+//use App\Images;
+//use Image;
 
 class imageController extends Controller
 {
@@ -18,28 +20,24 @@ class imageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    
+    public function list_all()
     {
-
         $headers = [
             'Access-Control-Allow-Methods'=> 'POST, GET, OPTIONS, PUT, DELETE',
             'Access-Control-Allow-Headers'=> 'X-Requested-With, Content-Type, Accept, Origin, Authorization',
             'Access-Control-Allow-Origin' => '*'
         ];
-
-        $response = image::all();
-
+        $response = imageModel::all();
         return \response($response, 200, $headers);
-        
-       // return response()->json(['status'=>200,'Array'=>$response]);
     }
-
+ 
     /**
-     * Show the form for creating a new resource.
+     * Import files from api
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function import()
     {
         $array_imagenes;
         $client = new Client([
@@ -53,9 +51,8 @@ class imageController extends Controller
             if($iterator == 3) {
                 $iterator_b =0;
                     foreach ($data as $key => $unidad) {
-                        $new_image = new image();
-                                                // echo($unidad);
-                        $new_image = new image;
+                        $new_image = new imageModel();
+                       // $new_image = new imageModel;
                         $new_image->title= $unidad['title'] ;
                         $new_image->category= $unidad['category'] ;
                         $new_image->description= $unidad['description'] ;
@@ -80,11 +77,44 @@ class imageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($title)
     {
-        return response()->json(['status'=>'ok','data'=>Image::find($id)],200);
+        dd('gola')
+        $images = imageModel::where($title , '=', $title);
+        return response()->json(['status'=>'ok','data'=>$images],200);
     }
+    /**
+     *create new resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Request $request)
+    {
+    try{
+        $valid = $request->validate( [
+            'title' => 'required',
+            'category' => ['required','string'],
+            'description' => ['required','string'],
+            'url' => ['required','string','regex:/^http:\/\/\w+(\.\w+)*(:[0-9]+)?\/?$/']
+        ]);
 
+        $new_image = new imageModel();
+        $new_image->title= $request->get('title') ;
+        $new_image->category= $request->get('category');
+        $new_image->description= $request->get('description') ;
+        $new_image->url= $request->get('url') ;
+        $response = $new_image -> save();
+        if( $response ){
+            $response  =['status'=>200,'state'=>'Imagen guardada','id'=>$new_image->id,'esvalido'=>$valid];
+            return response()->json($response,200);
+        }else {
+            return response()->json(['status'=>'No se pudo guardar la imagen.'],400);
+        }
+        }catch( Excepcion $e) {
+            return response()->json(['status' => 400, 'state' => 'Hubo un problema al cargar la imagen']);
+        }    
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -93,7 +123,13 @@ class imageController extends Controller
      */
     public function update(Request $request)
     {
-       $imageUpdate = image::find($request->get('id'));
+        $valid = $request->validate( [
+            'title' => 'required',
+            'category' => ['required','string'],
+            'description' => ['required','string'],
+            'url' => ['required','string','regex:/^http:\/\/\w+(\.\w+)*(:[0-9]+)?\/?$/']
+        ]);
+       $imageUpdate = imageModel::find($request->get('id'));
        if( $imageUpdate ) { 
            $imageUpdate['url'] = $request->get('url');
            $imageUpdate['category'] = $request->get('category');
