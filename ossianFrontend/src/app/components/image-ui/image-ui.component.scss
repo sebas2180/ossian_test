@@ -1,3 +1,4 @@
+ 
 .panel-1{
     position: relative;
     width: 100%;
@@ -13,6 +14,7 @@
 }
 .panel-4{
     display: flex;
+    
     width: 100%;
     justify-content: center;
     align-content: center;
@@ -33,18 +35,20 @@
     height: 100%;
   
 }
-
-
-@media(max-width:768px) {
-    app-import-images{
-        position: relative;
-        width: 50%;
-    }
+app-import-images{
+    position: relative;
+    width: 50%;
 }
-@media(min-width:768px) {
-    app-import-images{
-        position: relative;
-        width: 50%;
 
-    }
+@media(min-width:576px){
+
+}
+@media(min-width:768px){
+
+}
+@media(min-width:992px){
+
+}
+@media(min-width:1200px){
+
 }

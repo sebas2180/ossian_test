@@ -43,11 +43,6 @@ export class ImageComponent implements OnInit {
       confirmButtonText: 'Si, eliminarlo!'
     }).then((result) => {
       if (result.value) {
-        this.ImageService.delete(this.image.id).subscribe(
-           err => {
-            this.alertCheck('success', err['state'] );
-          }
-        );
         this.updateList.emit(this.image);
       }
     })

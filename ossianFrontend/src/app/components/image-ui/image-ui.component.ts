@@ -1,7 +1,6 @@
 import { ImageModule } from 'src/app/models/image/image.module';
 import { ImageService } from './../../services/image/image.service';
 import { Component, OnInit } from '@angular/core';
- 
 @Component({
   selector: 'app-image-ui',
   templateUrl: './image-ui.component.html',
@@ -16,33 +15,39 @@ export class ImageUIComponent implements OnInit {
   constructor(private ImageService: ImageService) {
    }
   ngOnInit(): void {
-    this.addImages();
+    this.addImages(null);
   }
-  addImages(): void {
-    this.panel = 1;
-    this.images = null;
-    console.log('addImages()');
-    this.ImageService.list().subscribe(
-      res => {
-        if(res.length != 0 ){
-          console.log(res.length);
-          this.images = res;
-          this.panel = 3;
-        }else  {
-          this.panel = 2;
+  addImages(e): void {
+    if(e === null || e === undefined || e === '' ){
+      this.panel = 3;
+      this.images = null;
+      this.ImageService.list().subscribe(
+        res => {
+          if(res.length != 0 ){
+            this.images = res;
+            console.log( this.images);
+            this.panel = 3;
+          }else  {
+            this.panel = 2;
+          }
+        },
+        err =>{
+          console.log(err);
         }
-        console.log('panel   '+ this.panel);
-      },
-      err => {
-        console.log(err);
+      ) ;
+    } else {  // Filtra el array de imagenes
+      console.log( 'else');
+    let aux: ImageModule[] = [];
+    this.images.forEach(element => {
+      if(element.title === e){
+        aux.push(element);
       }
-    ) ;
+    });
+    this.images = aux;
+    }
   }
   editFile(e: ImageModule): void {// Muestra/oculta la modificacion de imagenes.
     this.image_to_edit = e;
-    console.log(this.image_to_edit.category);
-    console.log(this.image_to_edit.title);
-    console.log(this.image_to_edit.url);
     this.panel = 4;
   }
   updateList(e ): void{// Actualiza la lista de imagenes.

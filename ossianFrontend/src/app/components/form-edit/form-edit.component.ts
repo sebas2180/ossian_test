@@ -33,7 +33,6 @@ export class FormEditComponent implements OnInit{
     });
   }
   ngOnInit(): void {
-    console.log(this.image.description);
     if(this.image){
       this.add_info();
      }
@@ -99,7 +98,6 @@ export class FormEditComponent implements OnInit{
     });
   }
   return():void {
-    console.log('RETURN');
     this.return_page.emit();
   }
 }

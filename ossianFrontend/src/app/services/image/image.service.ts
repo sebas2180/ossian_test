@@ -14,6 +14,7 @@ export class ImageService {
   }
 
   list() {
+    console.log('service list')
     return this.http.get<ImageModule[]> (`${environment.apiUrlBackEnd}/list`);
     }
 
@@ -44,11 +45,12 @@ export class ImageService {
     .append('Access-Control-Allow-Origin', '*');
     return this.http.get(`${environment.apiUrlBackEnd}/import`, {headers: headers});
   }
-  show(title) {
-    const params = new HttpParams()
-    .set('title', title.toString());
-    console.log('shiw()');
-    return this.http.get(`${environment.apiUrlBackEnd}/show/`,
-    { params: params });
+  show(dates) {
+    const headers = new HttpHeaders()
+    .append('Content-Type', 'application/json')
+    .append('Access-Control-Allow-Headers', 'Content-Type')
+    .append('Access-Control-Allow-Methods', 'POST')
+    .append('Access-Control-Allow-Origin', '*');
+    return this.http.post(`${environment.apiUrlBackEnd}/show`,dates,{headers: headers});
   }
 }

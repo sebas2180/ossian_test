@@ -31,7 +31,20 @@ class imageController extends Controller
         $response = imageModel::all();
         return \response($response, 200, $headers);
     }
- 
+     /**
+     * Display the specified resource.
+     *
+     * @param  String  $title
+     * @return \Illuminate\Http\Response
+     */
+    public function list_one(Request $request)
+    {
+        
+         dd($id);
+         $images = imageModel::find('id');
+        return response()->json(['status'=>'ok','data'=>'$images'],200);
+    }
+
     /**
      * Import files from api
      *
@@ -71,18 +84,6 @@ class imageController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($title)
-    {
-        dd('gola')
-        $images = imageModel::where($title , '=', $title);
-        return response()->json(['status'=>'ok','data'=>$images],200);
-    }
     /**
      *create new resource.
      *

@@ -1,5 +1,5 @@
-<div  *ngIf="panel == 2 || panel == 3">
-    <app-navbar></app-navbar>
+<div clas="nav" *ngIf="panel == 2 || panel == 3">
+    <app-navbar (filter)="addImages($event)"></app-navbar >
 </div>
 <div class="panel-1">
     <div class="panel-2" *ngIf="panel == 2">

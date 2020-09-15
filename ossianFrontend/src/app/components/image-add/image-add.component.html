@@ -17,7 +17,7 @@
     
                 <mat-form-field class="url" appearance="outline" name="url">
                     <mat-label>URL imagen</mat-label>
-                    <input matInput type="text" formControlName="url">
+                    <input matInput type="url" formControlName="url">
                     <mat-error *ngIf="this.form.get('url')?.invalid ">Falta imagen</mat-error>
                 </mat-form-field>
     

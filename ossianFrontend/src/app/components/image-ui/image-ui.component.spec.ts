@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ImageUIComponent } from './image-ui.component';
 
 describe('ImageUIComponent', () => {
@@ -8,7 +8,10 @@ describe('ImageUIComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ImageUIComponent ]
+      declarations: [ ImageUIComponent ],
+      imports: [
+        HttpClientTestingModule,
+    ]
     })
     .compileComponents();
   });

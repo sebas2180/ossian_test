@@ -1,5 +1,5 @@
 import { ImageService } from './../../services/image/image.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -7,22 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  value = '';
-  constructor( private ImageService:  ImageService) { }
-
+  
+  constructor( ) { }
+  @Output() filter = new EventEmitter();
   ngOnInit(): void {
   }
 
   search(value: string): void {
-    this.value = value;
-    console.log(this.value);
-    this.ImageService.show(this.value).subscribe(
-      res => {
-        console.log(res);
-      },
-      err => {
-        console.log(err);
-      }
-    )
+ 
+    this.filter.emit( value);
   }
 }

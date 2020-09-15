@@ -9,3 +9,35 @@
 button{
     margin-bottom: 5px;
 }
+@media(min-width:576px){
+    app-image{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+    }
+ }
+ @media(min-width:768px){
+     app-image{
+         display: flex;
+         flex-direction: row;
+         width: 50%;
+         justify-content: center;
+     }
+ }
+ @media(min-width:992px){
+     app-image{
+         display: flex;
+         flex-direction: row;
+         width: 33%;
+         justify-content: center;
+     }
+ }
+ @media(min-width:1200px){
+     app-image{
+         display: flex;
+         flex-direction: row;
+         width: 25%;
+         justify-content: center;
+     }
+ }
