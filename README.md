@@ -21,4 +21,11 @@ BackEnd- laravel:
   test : tests\Feature\Http\Controllers\imageTest.php
   
 
+Frontend - Angular 10
+ 
+Funciones:
+ Importación de imágenes en caso de que la base de datos esté vacía.
 
+ Visualización, filtrado, modificación y eliminación de imágenes.
+
+ 
